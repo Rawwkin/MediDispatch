@@ -1,0 +1,48 @@
+model Ambulance {
+  id                 String          @id @default(uuid())
+  registrationNumber String          @unique @db.VarChar(64)
+  type               AmbulanceType   @default(BASIC_LIFE_SUPPORT)
+  capacity           Int             @default(2)
+  status             AmbulanceStatus @default(AVAILABLE)
+
+  latitude  Float?
+  longitude Float?
+
+  isActive  Boolean @default(true)
+
+  isDeleted Boolean   @default(false)
+  deletedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  drivers     Driver[]
+  assignments DispatchAssignment[]
+  trips       Trip[]
+
+  @@index([status])
+  @@index([isActive])
+  @@index([isDeleted])
+  @@map("ambulances")
+}
+
+model Driver {
+  id            String   @id @default(uuid())
+  name          String   @db.VarChar(120)
+  phone         String   @db.VarChar(32)
+  licenseNumber String   @unique @db.VarChar(64)
+  licenseExpiry DateTime
+
+  ambulanceId String?
+  ambulance   Ambulance? @relation(fields: [ambulanceId], references: [id], onDelete: SetNull)
+
+  isActive  Boolean   @default(true)
+  deletedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([ambulanceId])
+  @@index([isActive])
+  @@map("drivers")
+}

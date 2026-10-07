@@ -1,0 +1,29 @@
+model Payment {
+  id String @id @default(uuid())
+
+  tripId String @unique
+  trip   Trip   @relation(fields: [tripId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  amount   Float
+  currency String @default("usd")
+
+  provider PaymentProvider @default(STRIPE)
+  status   PaymentStatus   @default(PENDING)
+
+  sessionId      String? @unique // Stripe Checkout Session
+  transactionId  String? @unique // Stripe Payment Intent
+  failureMessage String? @db.Text
+
+  paidAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([status])
+  @@index([provider])
+  @@map("payments")
+}

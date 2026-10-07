@@ -1,0 +1,29 @@
+npm init
+npm install typescript tsx @types/node --save-dev
+npx tsc --init
+
+npm install prisma @types/pg --save-dev
+npm install @prisma/client @prisma/adapter-pg pg dotenv
+
+npx prisma
+npx prisma init --output ../generated/prisma
+
+npm i jsonwebtoken
+npm i @types/jsonwebtoken
+
+npm i http-status
+
+npm i cookie-parser
+npm i @types/cookie-parser
+
+
+npm i cors
+npm i @types/cors
+
+
+npm i bcrypt
+npm i @types/bcrypt
+
+
+npm i express
+npm i @types/express

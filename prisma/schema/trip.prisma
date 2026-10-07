@@ -1,0 +1,36 @@
+model Trip {
+  id String @id @default(uuid())
+
+  emergencyRequestId String           @unique
+  emergencyRequest   EmergencyRequest @relation(fields: [emergencyRequestId], references: [id], onDelete: Cascade)
+
+  ambulanceId String
+  ambulance   Ambulance @relation(fields: [ambulanceId], references: [id], onDelete: Cascade)
+
+  hospitalId String?
+  hospital   Hospital? @relation(fields: [hospitalId], references: [id], onDelete: SetNull)
+
+  status TripStatus @default(NOT_STARTED)
+
+  startedAt        DateTime?
+  enRouteAt        DateTime?
+  atSceneAt        DateTime?
+  pickedUpAt       DateTime?
+  hospitalArrivedAt DateTime?
+  completedAt      DateTime?
+
+  distance       Float? // km
+  estimatedFare  Float? // currency
+  finalFare      Float? // currency
+  currency       String  @default("usd")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  payment Payment?
+
+  @@index([ambulanceId])
+  @@index([hospitalId])
+  @@index([status])
+  @@map("trips")
+}

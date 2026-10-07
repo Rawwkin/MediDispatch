@@ -1,0 +1,29 @@
+model DispatchAssignment {
+  id String @id @default(uuid())
+
+  emergencyRequestId String
+  emergencyRequest   EmergencyRequest @relation(fields: [emergencyRequestId], references: [id], onDelete: Cascade)
+
+  ambulanceId String
+  ambulance   Ambulance @relation(fields: [ambulanceId], references: [id], onDelete: Cascade)
+
+  dispatcherId String
+  dispatcher   User   @relation("DispatcherAssignments", fields: [dispatcherId], references: [id], onDelete: Cascade)
+
+  status DispatchAssignmentStatus @default(PENDING)
+
+  assignedAt  DateTime  @default(now())
+  acceptedAt  DateTime?
+  cancelledAt DateTime?
+
+  note String? @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([emergencyRequestId])
+  @@index([ambulanceId])
+  @@index([dispatcherId])
+  @@index([status])
+  @@map("dispatch_assignments")
+}

@@ -1,0 +1,65 @@
+model User {
+  id           String   @id @default(uuid())
+  name         String   @db.VarChar(120)
+  email        String   @unique
+  password     String
+  phone        String?  @db.VarChar(32)
+  profileImage String?
+
+  role   UserRole   @default(CALLER)
+  status UserStatus @default(ACTIVE)
+
+  isDeleted Boolean   @default(false)
+  deletedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  profile              Profile?
+  refreshTokens        RefreshToken[]
+  emergencyRequests    EmergencyRequest[]
+  payments             Payment[]
+  auditLogs            AuditLog[]
+  dispatcherAssignments DispatchAssignment[] @relation("DispatcherAssignments")
+
+  @@index([role])
+  @@index([status])
+  @@map("users")
+}
+
+model Profile {
+  id String @id @default(uuid())
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  bloodGroup  String? @db.VarChar(8)
+  address     String?
+  city        String?
+  country     String?
+  emergencyContactName  String?
+  emergencyContactPhone String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("profiles")
+}
+
+model RefreshToken {
+  id String @id @default(uuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  tokenHash String   @unique
+  expiresAt DateTime
+  revokedAt DateTime?
+  replacedById String? @unique
+
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("refresh_tokens")
+}

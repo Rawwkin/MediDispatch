@@ -1,0 +1,11 @@
+// Emergency Ambulance Dispatch — generator + datasource.
+// All other model / enum files in this folder are merged automatically by Prisma.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}

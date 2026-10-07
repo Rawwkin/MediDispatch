@@ -1,0 +1,57 @@
+model EmergencyRequest {
+  id String @id @default(uuid())
+
+  callerId String
+  caller   User   @relation(fields: [callerId], references: [id], onDelete: Cascade)
+
+  emergencyType EmergencyType
+  priority      EmergencyPriority
+  status        EmergencyStatus   @default(PENDING)
+
+  description     String? @db.Text
+  locationAddress String? @db.VarChar(255)
+  latitude        Float
+  longitude       Float
+
+  contactPhone String? @db.VarChar(32)
+  contactName  String? @db.VarChar(120)
+
+  cancelledReason String? @db.Text
+  cancelledBy     String? @db.VarChar(32) // "CALLER" | "DISPATCHER" | "SYSTEM"
+
+  isDeleted Boolean   @default(false)
+  deletedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  statusHistory EmergencyStatusHistory[]
+  assignments   DispatchAssignment[]
+  trip          Trip?
+
+  @@index([callerId])
+  @@index([status])
+  @@index([priority])
+  @@index([createdAt])
+  @@index([isDeleted])
+  @@map("emergency_requests")
+}
+
+model EmergencyStatusHistory {
+  id String @id @default(uuid())
+
+  emergencyRequestId String
+  emergencyRequest   EmergencyRequest @relation(fields: [emergencyRequestId], references: [id], onDelete: Cascade)
+
+  fromStatus EmergencyStatus?
+  toStatus   EmergencyStatus
+
+  changedBy String? // userId
+  note      String? @db.Text
+
+  createdAt DateTime @default(now())
+
+  @@index([emergencyRequestId])
+  @@index([createdAt])
+  @@map("emergency_status_history")
+}

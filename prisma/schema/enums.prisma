@@ -1,0 +1,100 @@
+// All enums for the project live here.
+
+enum UserRole {
+  CALLER
+  DISPATCHER
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+}
+
+enum AmbulanceStatus {
+  AVAILABLE
+  RESERVED
+  EN_ROUTE
+  AT_SCENE
+  PATIENT_ONBOARD
+  AT_HOSPITAL
+  MAINTENANCE
+  OFFLINE
+}
+
+enum AmbulanceType {
+  BASIC_LIFE_SUPPORT
+  ADVANCED_LIFE_SUPPORT
+  PATIENT_TRANSPORT
+  NEONATAL
+  AIR_AMBULANCE
+}
+
+enum EmergencyType {
+  CARDIAC
+  TRAUMA
+  RESPIRATORY
+  STROKE
+  OBSTETRIC
+  PEDIATRIC
+  BURN
+  POISONING
+  GENERAL_MEDICAL
+  ACCIDENT
+  OTHER
+}
+
+enum EmergencyPriority {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum EmergencyStatus {
+  PENDING
+  DISPATCHING
+  ASSIGNED
+  EN_ROUTE
+  ARRIVED
+  PICKED_UP
+  HOSPITAL_SELECTED
+  HOSPITAL_ARRIVED
+  COMPLETED
+  CANCELLED
+}
+
+enum DispatchAssignmentStatus {
+  PENDING
+  ACCEPTED
+  EN_ROUTE
+  AT_SCENE
+  PATIENT_ONBOARD
+  AT_HOSPITAL
+  COMPLETED
+  CANCELLED
+  REASSIGNED
+}
+
+enum TripStatus {
+  NOT_STARTED
+  EN_ROUTE
+  AT_SCENE
+  PATIENT_ONBOARD
+  AT_HOSPITAL
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  PAID
+  FAILED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentProvider {
+  STRIPE
+}

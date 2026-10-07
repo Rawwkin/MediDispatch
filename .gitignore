@@ -1,0 +1,25 @@
+# Node
+node_modules/
+dist/
+
+# Env
+.env
+.env.local
+
+# Prisma generated client
+generated/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+
+# Tests
+coverage/

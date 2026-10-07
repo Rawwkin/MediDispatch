@@ -1,0 +1,24 @@
+model Hospital {
+  id        String   @id @default(uuid())
+  name      String   @db.VarChar(160)
+  phone     String   @db.VarChar(32)
+  email     String?  @db.VarChar(160)
+  address   String
+  city      String?  @db.VarChar(80)
+  latitude  Float?
+  longitude Float?
+
+  isActive  Boolean   @default(true)
+  isDeleted Boolean   @default(false)
+  deletedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  trips Trip[]
+
+  @@index([isActive])
+  @@index([isDeleted])
+  @@index([city])
+  @@map("hospitals")
+}
