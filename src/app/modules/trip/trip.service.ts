@@ -20,31 +20,69 @@ const computeEstimatedFare = (distanceKm: number): number => {
 };
 
 const TRIP_INCLUDE = {
-  emergencyRequest: {
-    select: {
-      id: true,
-      emergencyType: true,
-      priority: true,
-      status: true,
-      latitude: true,
-      longitude: true,
-      locationAddress: true,
-      caller: { select: { id: true, name: true, email: true, phone: true } },
-    },
-  },
-  ambulance: {
-    select: {
-      id: true,
-      registrationNumber: true,
-      type: true,
-      status: true,
-      latitude: true,
-      longitude: true,
-    },
-  },
-  hospital: true,
-  payment: true,
+	id: true,
+
+	emergencyRequest: {
+		select: {
+			id: true,
+			emergencyType: true,
+			priority: true,
+			status: true,
+			latitude: true,
+			longitude: true,
+			locationAddress: true,
+			caller: {
+				select: {
+					id: true,
+					name: true,
+					email: true,
+					phone: true,
+				},
+			},
+		},
+	},
+
+	ambulance: {
+		select: {
+			id: true,
+			registrationNumber: true,
+			type: true,
+			status: true,
+			latitude: true,
+			longitude: true,
+		},
+	},
+
+	hospital: true,
+	payment: true,
 } as const;
+
+// const TRIP_INCLUDE = {
+//   emergencyRequest: {
+//     select: {
+//       id: true,
+//       emergencyType: true,
+//       priority: true,
+//       status: true,
+//       latitude: true,
+//       longitude: true,
+//       locationAddress: true,
+//       caller: { select: { id: true, name: true, email: true, phone: true } },
+//     },
+//   },
+//   ambulance: {
+//     select: {
+//       id: true,
+//       registrationNumber: true,
+//       type: true,
+//       status: true,
+//       latitude: true,
+//       longitude: true,
+//     },
+//   },
+//   hospital: true,
+//   payment: true,
+// } as const;
 
 export const tripService = {
   async list(actorRole: string, actorId: string, query: Record<string, unknown>) {

@@ -1,6 +1,5 @@
 import { z } from "zod";
-
-const objectIdSchema = z.string().uuid("Invalid id");
+import { objectIdSchema } from "../../utils/idSchema";
 
 const createPaymentSchema = z.object({
   tripId: objectIdSchema,

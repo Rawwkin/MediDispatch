@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { UserRole, UserStatus } from "../../../../generated/prisma/enums";
-
-const objectIdSchema = z.string().uuid("Invalid id");
+import { objectIdSchema } from "../../utils/idSchema";
 
 const updateMyProfileSchema = z.object({
   name: z.string().trim().min(2).max(120).optional(),

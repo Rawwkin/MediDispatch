@@ -1,6 +1,5 @@
 import { z } from "zod";
-
-const objectIdSchema = z.string().uuid("Invalid id");
+import { objectIdSchema } from "../../utils/idSchema";
 
 const createDriverSchema = z.object({
   name: z.string().trim().min(2).max(120),

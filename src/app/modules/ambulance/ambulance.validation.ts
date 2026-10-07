@@ -3,8 +3,7 @@ import {
   AmbulanceStatus,
   AmbulanceType,
 } from "../../../../generated/prisma/enums";
-
-const objectIdSchema = z.string().uuid("Invalid id");
+import { objectIdSchema } from "../../utils/idSchema";
 const latitudeSchema = z.number().min(-90).max(90);
 const longitudeSchema = z.number().min(-180).max(180);
 

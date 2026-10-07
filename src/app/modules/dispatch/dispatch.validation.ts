@@ -4,8 +4,7 @@ import {
   EmergencyPriority,
   EmergencyType,
 } from "../../../../generated/prisma/enums";
-
-const objectIdSchema = z.string().uuid("Invalid id");
+import { objectIdSchema } from "../../utils/idSchema";
 
 const assignAmbulanceSchema = z.object({
   ambulanceId: objectIdSchema,

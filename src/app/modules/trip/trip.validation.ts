@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { TripStatus } from "../../../../generated/prisma/enums";
-
-const objectIdSchema = z.string().uuid("Invalid id");
+import { objectIdSchema } from "../../utils/idSchema";
 
 const updateTripStatusSchema = z.object({
   status: z.nativeEnum(TripStatus),

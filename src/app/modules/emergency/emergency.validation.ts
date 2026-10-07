@@ -4,8 +4,7 @@ import {
   EmergencyStatus,
   EmergencyType,
 } from "../../../../generated/prisma/enums";
-
-const objectIdSchema = z.string().uuid("Invalid id");
+import { objectIdSchema } from "../../utils/idSchema";
 
 const createEmergencySchema = z.object({
   emergencyType: z.nativeEnum(EmergencyType),
