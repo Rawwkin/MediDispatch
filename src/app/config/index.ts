@@ -33,6 +33,7 @@ export const config = {
   bcryptSaltRounds: Number(optional("BCRYPT_SALT_ROUNDS", "10")),
 
   stripe: {
+    productKey: optional("STRIPE_PRODUCT_PRICE_ID", "prod_placeholder"),
     secretKey: optional("STRIPE_SECRET_KEY", "sk_test_placeholder"),
     webhookSecret: optional("STRIPE_WEBHOOK_SECRET", "whsec_placeholder"),
     currency: optional("STRIPE_CURRENCY", "usd"),
